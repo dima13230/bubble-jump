@@ -4,3 +4,5 @@
 Library/StateCache
 Library/PlayerDataCache
 Temp
+Library/ArtifactDB
+LIbrary/Artifacts
