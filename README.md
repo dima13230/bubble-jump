@@ -6,7 +6,7 @@ Bubble jump is the minimal Doodle Jump clone made in Unity Engine as test task f
 
 ##### Screenshot:
 
-<img title="" src="file:///H:/Programming/Unity%20Projects/Bubble%20Jump/Screenshots/Screenshot.jpg" alt="Screenshot.jpg" width="159">
+<img title="" src="/Screenshots/Screenshot.jpg" alt="Screenshot.jpg" width="159">
 
 ##### What is done:
 
