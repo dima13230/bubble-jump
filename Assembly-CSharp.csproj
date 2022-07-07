@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{2DBEBBCE-F37C-763E-AC09-2F9FD52201EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,10 +65,11 @@
     <Compile Include="Assets\Scripts\Structs\Platform.cs" />
     <Compile Include="Assets\Scripts\Structs\InteractableObject.cs" />
     <Compile Include="Assets\Scripts\LevelGenerator.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameProgressManager.cs" />
     <Compile Include="Assets\Scripts\UI\IngameUI.cs" />
     <Compile Include="Assets\Scripts\Structs\PlatformType.cs" />
     <Compile Include="Assets\Scripts\Structs\Platform Types\MovingPlatform.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameProgressManager.cs" />
+    <Compile Include="Assets\Scripts\Util\DebugUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

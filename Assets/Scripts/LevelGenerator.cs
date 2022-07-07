@@ -7,11 +7,12 @@ public class LevelGenerator : MonoBehaviour
     public float MinXDistance = 1;
     public float MaxXDistance = 3f;
 
-    public float MinYDistance = 1;
-    public float MaxYDistance = 3;
+    [Tooltip("На такое значение повышается высота каждой новой платформы")]
+    public float DeltaGlobalHeightOffset = 0.7f;
 
     public PlatformType[] PlatformTypes;
 
+    [Tooltip("Столько платформ будет создано в уровне")]
     public int PlatformsPerGeneration = 20;
 
     float globalHeightOffset;
@@ -24,8 +25,10 @@ public class LevelGenerator : MonoBehaviour
             0.5f,
             0,
             Camera.main.nearClipPlane);
+        // в начале уровня непосредственно под игроком всегда спавнится обычная платформа
         Instantiate(PlatformType.GetPlatform(PlatformTypes, "Normal").Platform, Camera.main.ViewportToWorldPoint(positionCenter), Quaternion.identity);
 
+        // создаём по 5 платформ влево и вправо от центральной платформы
         for (float i = 1; i < 5; i++)
         {
             Vector3 position1 = new Vector3(
@@ -41,6 +44,8 @@ public class LevelGenerator : MonoBehaviour
             Instantiate(PlatformType.RandomSafePlatform(PlatformTypes).Platform, Camera.main.ViewportToWorldPoint(position2), Quaternion.identity);
         }
 
+
+
         // создаём остальные платформы
         for (int i = 0; i < PlatformsPerGeneration; i++)
         {
@@ -51,7 +56,7 @@ public class LevelGenerator : MonoBehaviour
 
             PlatformType currentType = PlatformType.RandomPlatform(PlatformTypes);
             Instantiate(currentType.Platform, position, Quaternion.identity);
-            globalHeightOffset += 0.7f;
+            globalHeightOffset += DeltaGlobalHeightOffset;
         }
     }
 

@@ -1,3 +1,6 @@
 /Logs
 /Build
 /obj
+Library/StateCache
+Library/PlayerDataCache
+Temp

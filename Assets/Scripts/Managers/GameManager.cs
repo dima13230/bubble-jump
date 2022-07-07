@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player)
+        {
+            Debug.LogError("Не удалось найти объект игрока!");
+            return;
+        }
+
         if (player.transform.position.y > MaxPlayerHeight)
         {
             MaxPlayerHeight = player.transform.position.y;
@@ -43,6 +49,11 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        if (!DebugUtil.AssertNotNull(PauseUI, IngameUI ))
+        {
+            Debug.LogError("Невозможно поставить на паузу! PauseUI и/или IngameUI не заданы в GameManager!");
+            return;
+        }
         Time.timeScale = 0;
         PauseUI.gameObject.SetActive(true);
         IngameUI.gameObject.SetActive(false);
@@ -50,6 +61,11 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        if (!DebugUtil.AssertNotNull(PauseUI, IngameUI))
+        {
+            Debug.LogError("Невозможно возобновить игру! PauseUI и/или IngameUI не заданы в GameManager!");
+            return;
+        }
         Time.timeScale = 1;
         PauseUI.gameObject.SetActive(false);
         IngameUI.gameObject.SetActive(true);
@@ -68,6 +84,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (!DebugUtil.AssertNotNull(PauseUI, IngameUI))
+        {
+            Debug.LogError("Невозможно показать GameOverUI! GameOverUI и/или IngameUI не заданы в GameManager!");
+            return;
+        }
         Time.timeScale = 0;
         GameOverUI.gameObject.SetActive(true);
         IngameUI.gameObject.SetActive(false);

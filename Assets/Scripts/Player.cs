@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
 public class Player : MonoBehaviour
 {
     public float MovementDeadZone = 0.02f;
@@ -32,10 +33,14 @@ public class Player : MonoBehaviour
     {
         Vector2 velocity = rigidbody.velocity;
         float currentVelocity = 0;
-        velocity.x = Mathf.SmoothDamp(velocity.x, MathUtils.ProcessDeadZone(Input.acceleration.x, MovementDeadZone) * MovementSpeed * Time.deltaTime + Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime, ref currentVelocity, MovementSmoothing);
+        velocity.x = Mathf.SmoothDamp(velocity.x, 
+            MathUtils.ProcessDeadZone(Input.acceleration.x, MovementDeadZone) * MovementSpeed * Time.deltaTime // для мобильного устройства
+            + MathUtils.ProcessDeadZone(Input.GetAxis("Horizontal"), MovementDeadZone) * MovementSpeed * Time.deltaTime // для тестирования в редакторе с использованием клавиш
+            ,ref currentVelocity, MovementSmoothing);
 
         rigidbody.velocity = velocity;
 
+        // если игрок за пределами экрана, перемещаем его на такую же высоту но в противоположную сторону по горизонтали
         Vector3 playerViewportPosition = Camera.main.WorldToViewportPoint(transform.position);
         if (playerViewportPosition.x > 1.1f || playerViewportPosition.x < -0.1f)
         {

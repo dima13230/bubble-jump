@@ -1,10 +1,10 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - AcidPlatform
     - BreakingPlatform
     - CameraFollow
     - GameManager
+    - GameOverUI
     - HighJumpPlatform
     - IngameUI
     - LevelGenerator
@@ -16,7 +16,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -25,8 +24,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
-    Unity.Mobile.AndroidLogcat.Editor.dll:
-    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
@@ -72,29 +69,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1746}
     - Class: 114
+      Script: {instanceID: 2036}
+    - Class: 114
       Script: {instanceID: 2308}
     - Class: 114
       Script: {instanceID: 2330}
     - Class: 114
       Script: {instanceID: 2678}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2772}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2950}
     - Class: 114
-      Script: {instanceID: 2952}
+      Script: {instanceID: 3210}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3228}
     - Class: 114
-      Script: {instanceID: 3230}
+      Script: {instanceID: 3472}
     - Class: 114
-      Script: {instanceID: 3474}
+      Script: {instanceID: 3596}
     - Class: 114
-      Script: {instanceID: 3598}
+      Script: {instanceID: 4854}
     - Class: 114
-      Script: {instanceID: 4856}
-    - Class: 114
-      Script: {instanceID: 5112}
+      Script: {instanceID: 5110}
     - Class: 114
       Script: {instanceID: 5688}
     - Class: 114
@@ -139,17 +136,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2330}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2772}
     - Class: 114
-      Script: {instanceID: 2952}
+      Script: {instanceID: 2950}
     - Class: 114
-      Script: {instanceID: 3032}
+      Script: {instanceID: 3030}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3210}
     - Class: 114
-      Script: {instanceID: 3474}
+      Script: {instanceID: 3472}
     - Class: 114
-      Script: {instanceID: 3598}
+      Script: {instanceID: 3596}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -265,7 +262,7 @@ ScriptsOnlyBuild:
     className: AndroidReceivedNotificationMainThreadDispatcher
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: fa55e55432802287cac04a3ca9ee2fe9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameOverUI
@@ -323,12 +320,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AcidPlatform
   - hash:
       serializedVersion: 2
       Hash: a1aa98c78061c6f03a8c124cda576e67
@@ -673,7 +664,7 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 6df19260340745b8ae176617d590cbf8
+      Hash: df2fc11622ac182276fd074065c98532
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelGenerator
@@ -765,4 +756,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Main Menu Scene.unity
   - Assets/Scenes/Ingame Scene.unity
-  playerPath: H:/Programming/Unity Projects/Doodle Jump/Build/Bubble Jump.apk
+  playerPath: H:/Programming/Unity Projects/Bubble Jump/Build/Bubble Jump.apk
