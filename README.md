@@ -1,6 +1,6 @@
 # Bubble Jump
 
-Bubble jump is the minimal Doodle Jump clone made in Unity Engine as test task for employment.
+Bubble jump is the minimal Doodle Jump clone made in Unity Engine.
 
 ##### Screenshot:
 
