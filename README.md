@@ -1,7 +1,5 @@
 # Bubble Jump
 
-<u>Repository's README is written using English language in order to demonstrate my level of language proficiency.</u>
-
 Bubble jump is the minimal Doodle Jump clone made in Unity Engine as test task for employment.
 
 ##### Screenshot:
