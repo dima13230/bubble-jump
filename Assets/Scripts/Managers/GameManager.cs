@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public int Score {
         get
         {
-            return (int)(MaxPlayerHeight * 20);
+            return (int)(MaxPlayerHeight * 10);
         }
     }
     public float MaxPlayerHeight { get; private set; }
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         if (!player)
         {
-            Debug.LogError("Не удалось найти объект игрока!");
+            Debug.LogError("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
             return;
         }
 
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (!DebugUtil.AssertNotNull(PauseUI, IngameUI ))
         {
-            Debug.LogError("Невозможно поставить на паузу! PauseUI и/или IngameUI не заданы в GameManager!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ! PauseUI пїЅ/пїЅпїЅпїЅ IngameUI пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ GameManager!");
             return;
         }
         Time.timeScale = 0;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         if (!DebugUtil.AssertNotNull(PauseUI, IngameUI))
         {
-            Debug.LogError("Невозможно возобновить игру! PauseUI и/или IngameUI не заданы в GameManager!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ! PauseUI пїЅ/пїЅпїЅпїЅ IngameUI пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ GameManager!");
             return;
         }
         Time.timeScale = 1;
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     {
         if (!DebugUtil.AssertNotNull(PauseUI, IngameUI))
         {
-            Debug.LogError("Невозможно показать GameOverUI! GameOverUI и/или IngameUI не заданы в GameManager!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GameOverUI! GameOverUI пїЅ/пїЅпїЅпїЅ IngameUI пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ GameManager!");
             return;
         }
         Time.timeScale = 0;

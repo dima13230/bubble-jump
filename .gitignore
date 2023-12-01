@@ -6,3 +6,4 @@ Library/PlayerDataCache
 Temp
 Library/ArtifactDB
 LIbrary/Artifacts
+*.dylib

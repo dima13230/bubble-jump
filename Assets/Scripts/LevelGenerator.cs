@@ -6,58 +6,84 @@ public class LevelGenerator : MonoBehaviour
 {
     public float MinXDistance = 1;
     public float MaxXDistance = 3f;
-
-    [Tooltip("На такое значение повышается высота каждой новой платформы")]
-    public float DeltaGlobalHeightOffset = 0.7f;
-
     public PlatformType[] PlatformTypes;
+    public float PlatformHeightVariation = 0.2f; // Variation in platform heights
+    public int PlatformsPerGeneration = 150;
+    public float DeltaGlobalHeightOffset = 0.8f; // Adjust this value as needed
 
-    [Tooltip("Столько платформ будет создано в уровне")]
-    public int PlatformsPerGeneration = 20;
-
-    float globalHeightOffset;
+    private GameObject lastPlatform;
+    private Camera mainCamera;
+    private float platformWidth;
 
     // Start is called before the first frame update
     void Start()
     {
-        // создаём безопасные платформы на нулевой высоте
-        Vector3 positionCenter = new Vector3(
-            0.5f,
-            0,
-            Camera.main.nearClipPlane);
-        // в начале уровня непосредственно под игроком всегда спавнится обычная платформа
-        Instantiate(PlatformType.GetPlatform(PlatformTypes, "Normal").Platform, Camera.main.ViewportToWorldPoint(positionCenter), Quaternion.identity);
+        mainCamera = Camera.main;
+        platformWidth = CalculatePlatformWidth();
 
-        // создаём по 5 платформ влево и вправо от центральной платформы
-        for (float i = 1; i < 5; i++)
-        {
-            Vector3 position1 = new Vector3(
-                0.5f + i / 5,
-                0,
-                Camera.main.nearClipPlane);
-            Instantiate(PlatformType.RandomSafePlatform(PlatformTypes).Platform, Camera.main.ViewportToWorldPoint(position1), Quaternion.identity);
+        // Generate the first platform just below the player's starting position
+        Vector3 playerStartingPosition = new Vector3(0.5f, 0f, mainCamera.nearClipPlane);
+        InstantiatePlatform(playerStartingPosition, true);
 
-            Vector3 position2 = new Vector3(
-                0.5f - i / 5,
-                0,
-                Camera.main.nearClipPlane);
-            Instantiate(PlatformType.RandomSafePlatform(PlatformTypes).Platform, Camera.main.ViewportToWorldPoint(position2), Quaternion.identity);
-        }
-
-
-
-        // создаём остальные платформы
         for (int i = 0; i < PlatformsPerGeneration; i++)
         {
-            Vector3 position = new Vector3(
-                Random.Range(MinXDistance, MaxXDistance),
-                globalHeightOffset + 0.8f,
-                Camera.main.nearClipPlane);
+            // Calculate the position of the next platform based on the last platform
+            Vector3 position = CalculateNextPlatformPosition();
 
-            PlatformType currentType = PlatformType.RandomPlatform(PlatformTypes);
-            Instantiate(currentType.Platform, position, Quaternion.identity);
-            globalHeightOffset += DeltaGlobalHeightOffset;
+            // Randomly adjust the platform height within the specified variation range
+            position.y += Random.Range(-PlatformHeightVariation, PlatformHeightVariation);
+
+            // Instantiate the platform at the calculated position
+            GameObject newPlatform = InstantiatePlatform(position);
+
+            // Update the last platform reference
+            lastPlatform = newPlatform;
         }
     }
 
+    Vector3 CalculateNextPlatformPosition()
+    {
+        float lastPositionX = lastPlatform != null ? lastPlatform.transform.position.x : 0f;
+        float lastPositionY = lastPlatform != null ? lastPlatform.transform.position.y : 0;
+
+        // Calculate the position based on the last platform's position
+        float randomX = (int)Random.Range(-1f, 1f) + Random.Range(MinXDistance, MaxXDistance);
+        float newX = lastPositionX + randomX;
+        float newY = lastPositionY + DeltaGlobalHeightOffset;
+
+        // Check if the platform is outside the viewport bounds
+        Vector3 viewportPos = mainCamera.WorldToViewportPoint(new Vector3(newX, newY, mainCamera.nearClipPlane));
+
+        while (viewportPos.x < 0.4 || viewportPos.x > 0.6)
+        {
+            viewportPos.x = Mathf.Clamp01(viewportPos.x);
+            Vector3 worldPos = mainCamera.ViewportToWorldPoint(viewportPos);
+            newX = worldPos.x;
+        }
+
+        return new Vector3(newX, newY, mainCamera.nearClipPlane);
+    }
+
+    float CalculatePlatformWidth()
+    {
+        // Calculate the width of the platform based on the screen size
+        float screenHeight = mainCamera.orthographicSize * 2;
+        float screenWidth = screenHeight * mainCamera.aspect;
+
+        // Assume MinXDistance and MaxXDistance are normalized (0 to 1)
+        return (MaxXDistance - MinXDistance) * screenWidth;
+    }
+
+    GameObject InstantiatePlatform(Vector3 position, bool mustBeSafe = false)
+    {
+        PlatformType currentType = PlatformType.RandomPlatform(PlatformTypes);
+
+        // Instantiate and return the platform at the given position
+        while (mustBeSafe && !currentType.CanBeSpawnedAsSafe)
+            currentType = PlatformType.RandomPlatform(PlatformTypes);
+
+        // Convert normalized position to world coordinates
+        //Vector3 worldPosition = mainCamera.ViewportToWorldPoint(position);
+        return Instantiate(currentType.Platform, position, Quaternion.identity);
+    }
 }

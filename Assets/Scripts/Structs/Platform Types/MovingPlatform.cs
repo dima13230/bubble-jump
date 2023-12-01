@@ -30,6 +30,8 @@ public class MovingPlatform : Platform
     // Update is called once per frame
     void Update()
     {
+        base.Update();
+        
         if (direction == MovementDirection.Horizontal)
             currentOffset.x = Mathf.Sin(Time.time * MovementSpeed + individualMovementSeed) * MovementAmplitude;
         else

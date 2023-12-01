@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class BreakingPlatform : Platform
 {
+    public int interactionsToBreak = 1;
+    int interactCount = 0;
 
     public override void Interact()
     {
-        Destroy(gameObject);
+        if (interactCount == interactionsToBreak)
+            Destroy(gameObject);
+        interactCount++;
     }
 }

@@ -34,13 +34,13 @@ public class Player : MonoBehaviour
         Vector2 velocity = rigidbody.velocity;
         float currentVelocity = 0;
         velocity.x = Mathf.SmoothDamp(velocity.x, 
-            MathUtils.ProcessDeadZone(Input.acceleration.x, MovementDeadZone) * MovementSpeed * Time.deltaTime // для мобильного устройства
-            + MathUtils.ProcessDeadZone(Input.GetAxis("Horizontal"), MovementDeadZone) * MovementSpeed * Time.deltaTime // для тестирования в редакторе с использованием клавиш
+            MathUtils.ProcessDeadZone(Input.acceleration.x, MovementDeadZone) * MovementSpeed * Time.deltaTime // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            + MathUtils.ProcessDeadZone(Input.GetAxis("Horizontal"), MovementDeadZone) * MovementSpeed * Time.deltaTime // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             ,ref currentVelocity, MovementSmoothing);
 
         rigidbody.velocity = velocity;
 
-        // если игрок за пределами экрана, перемещаем его на такую же высоту но в противоположную сторону по горизонтали
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Vector3 playerViewportPosition = Camera.main.WorldToViewportPoint(transform.position);
         if (playerViewportPosition.x > 1.1f || playerViewportPosition.x < -0.1f)
         {
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // определяем положение объекта относительно игрока
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         RelativePosition relPosition = CheckRelativePosition(other);
         switch (relPosition)
         {
@@ -62,7 +62,9 @@ public class Player : MonoBehaviour
                     HighJump();
                 }
                 else if (other.gameObject.GetComponent<BreakingPlatform>())
-                { } // платформа ломается до того, как игрок может прыгнуть
+                {
+                    Jump();
+                } // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 else if (other.gameObject.GetComponent<Platform>())
                 {
                     Jump();
@@ -87,9 +89,9 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Возвращает положение объекта относительно игрока
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
-    /// <param name="collision">Коллайдер объекта, положение которого мы проверяем</param>
+    /// <param name="collision">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</param>
     /// <returns></returns>
     private RelativePosition CheckRelativePosition(Collider2D collision)
     {
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
             return RelativePosition.Below;
         else if (transform.position.x < collision.transform.position.x)
             return RelativePosition.Aside;
-        else if (transform.position.x > collision.transform.position.x) // сделал это отдельными ветками для читаемости кода
+        else if (transform.position.x > collision.transform.position.x) // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             return RelativePosition.Aside;
         else
             return RelativePosition.Inside;
